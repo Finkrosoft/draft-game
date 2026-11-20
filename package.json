@@ -1,0 +1,25 @@
+{
+  "name": "charakter-auktion",
+  "version": "1.0.0",
+  "description": "Lokales Auktions-Partyspiel: TV + Handys per QR-Code",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/run-test.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.22.3",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.4"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

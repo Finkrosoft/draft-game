@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141633">
+<title>Charakter-Auktion</title>
+<link rel="stylesheet" href="/play.css">
+</head>
+<body>
+
+<section id="joinView" hidden>
+  <h1>Charakter-Auktion</h1>
+  <form id="joinForm">
+    <label class="photo">
+      <img id="photoPreview" alt="" hidden>
+      <span id="photoHint">Foto antippen</span>
+      <input type="file" id="photoInput" accept="image/*" capture="user" hidden>
+    </label>
+    <input id="nameInput" maxlength="20" placeholder="Dein Name" autocomplete="nickname" required>
+    <button class="btn primary big" type="submit">Beitreten</button>
+  </form>
+  <p class="muted" id="joinNote"></p>
+</section>
+
+<section id="waitView" hidden>
+  <header class="me" id="meHeaderWait"></header>
+  <div class="panel center">
+    <h2>Du bist drin!</h2>
+    <p class="muted" id="waitText"></p>
+    <div id="waitPlayers" class="chips"></div>
+  </div>
+  <button class="btn ghost" id="leaveBtn">Lobby verlassen</button>
+</section>
+
+<section id="gameView" hidden>
+  <header class="me" id="meHeader"></header>
+  <div id="phaseBox"></div>
+
+  <div id="bidBox" class="panel" hidden>
+    <div class="bidrow">
+      <input id="bidInput" type="number" inputmode="decimal" min="0" step="1">
+      <span>Mio</span>
+    </div>
+    <div class="quick">
+      <button class="btn small" data-q="min">Min</button>
+      <button class="btn small" data-q="10">+10</button>
+      <button class="btn small" data-q="50">+50</button>
+      <button class="btn small" data-q="100">+100</button>
+      <button class="btn small" data-q="all">All-in</button>
+    </div>
+    <button class="btn primary big" id="bidBtn">Bieten</button>
+    <div class="two">
+      <button class="btn" id="withdrawBtn">Aussteigen</button>
+      <button class="btn" id="skipBtn">Skippen</button>
+    </div>
+  </div>
+
+  <div id="jokerBox" class="panel"></div>
+  <div id="myGrid" class="panel"></div>
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/common.js"></script>
+<script src="/play.js"></script>
+</body>
+</html>

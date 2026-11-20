@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charakter-Auktion · TV</title>
+<link rel="stylesheet" href="/host.css">
+</head>
+<body>
+<div id="bg"></div>
+
+<section id="lobby" class="view" hidden>
+  <div class="card lobby-settings">
+    <h1>Charakter-Auktion</h1>
+    <p class="muted">Gamemaster-Einstellungen</p>
+
+    <label class="field">
+      <span>Spieler <b id="outPlayers">4</b></span>
+      <input type="range" id="cfgPlayers" min="2" max="8" step="1">
+    </label>
+    <label class="field">
+      <span>Reihen / Runden <b id="outRows">5</b></span>
+      <input type="range" id="cfgRows" min="5" max="10" step="1">
+    </label>
+    <div class="gridsize">Raster: <b id="gridSize">4 × 5</b> <span class="muted">(Spalten = Spieler, Zeilen = Runden)</span></div>
+
+    <label class="field">
+      <span>Werte am Glücksrad <span class="muted">(Komma-getrennt, z. B. 0, 50M, 100M, -50M, 1Mrd)</span></span>
+      <textarea id="cfgWheel" rows="2" spellcheck="false"></textarea>
+    </label>
+
+    <div class="field">
+      <span>Hintergrund</span>
+      <div class="bgrow">
+        <input type="color" id="cfgColor" title="Hintergrundfarbe">
+        <label class="btn small">Bild wählen <input type="file" id="cfgBg" accept="image/*" hidden></label>
+        <button class="btn small ghost" id="bgClear">Bild entfernen</button>
+      </div>
+    </div>
+
+    <div class="charinfo"><span id="charCount">–</span> <button class="btn small ghost" id="rescan">Ordner neu einlesen</button></div>
+
+    <button class="btn primary big" id="startBtn">Spiel starten</button>
+  </div>
+
+  <div class="card lobby-join">
+    <h2>Mit dem Handy beitreten</h2>
+    <img id="qr" src="/api/qr" alt="QR-Code zum Beitreten">
+    <div class="joinurl" id="joinUrl"></div>
+    <h3>Spieler <span id="lobbyCount"></span></h3>
+    <div id="lobbyPlayers" class="lobby-players"></div>
+  </div>
+</section>
+
+<section id="game" class="view" hidden>
+  <aside id="players" class="col"></aside>
+  <main id="board" class="col">
+    <div id="roundInfo"></div>
+    <div id="grid"></div>
+  </main>
+  <aside id="spotlight" class="col"></aside>
+  <footer id="gmbar"></footer>
+</section>
+
+<div id="wheelOverlay" hidden>
+  <div class="wheels">
+    <div class="wheelBox">
+      <h2>Wer ist dran?</h2>
+      <div class="wheelWrap"><canvas id="wheelPlayers" width="460" height="460"></canvas><div class="pointer"></div></div>
+      <button class="btn primary" id="spinPlayerBtn">Spieler-Rad drehen</button>
+    </div>
+    <div class="wheelBox">
+      <h2>Wie viel gibt's?</h2>
+      <div class="wheelWrap"><canvas id="wheelValues" width="460" height="460"></canvas><div class="pointer"></div></div>
+      <button class="btn primary" id="spinValueBtn">Wert-Rad drehen</button>
+    </div>
+  </div>
+  <div id="wheelStatus"></div>
+  <div id="wheelResults"></div>
+  <button class="btn big" id="nextRoundBtn">Nächste Runde</button>
+</div>
+
+<div id="fatal" hidden></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/common.js"></script>
+<script src="/host.js"></script>
+</body>
+</html>
